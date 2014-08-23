@@ -1,0 +1,23 @@
+/*
+ Theme Name:   Twenty Thirteen Child
+ Theme URI:    http://www.bikefun.org/twenty-thirteen-child/
+ Description:  Twenty Thirteen Child Theme
+ Author:       Nik Dow
+ Author URI:   http://www.cbdweb.net
+ Template:     twentythirteen
+ Version:      1.0.0
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  twenty-thirteen-child
+*/
+
+@import url("../twentythirteen/style.css");
+
+/* =Theme customization starts here
+-------------------------------------------------------------- */
+
+h1.site-title, h2.site-description {
+    margin-left: -9999px !important;
+}
+.site-header, div.site-info {
+    display: none;
+}
