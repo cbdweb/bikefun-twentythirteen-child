@@ -23,3 +23,7 @@ h1.site-title, h2.site-description {
     display: none;
 }
 */
+
+#navbar {
+    display: none;
+}
