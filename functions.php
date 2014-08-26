@@ -97,3 +97,15 @@ function twentythirteen_paging_nav() {
 	</nav><!-- .navigation -->
 	<?php
 }
+function bf_register_sidebars() {
+    register_sidebar(array(
+    'name' => 'plainpage',
+    'id' => 3,
+    'description' => 'Widgets for plainpage footer.',
+    'before_widget' => '<div class="box">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+    ));
+}
+add_action( 'widgets_init', 'bf_register_sidebars' );
