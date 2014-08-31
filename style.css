@@ -27,3 +27,8 @@ h1.site-title, h2.site-description {
 #navbar {
     display: none;
 }
+
+.entry-thumbnail {
+    float: right;
+}
+
