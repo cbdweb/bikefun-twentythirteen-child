@@ -22,7 +22,7 @@ get_header(); ?>
 					<div class="entry-content">
                                                 <?php if ( has_post_thumbnail() && ! post_password_required() ) : ?>
 						<div class="entry-thumbnail">
-							<?php the_post_thumbnail(); ?>
+							<?php the_post_thumbnail("medium"); ?>
 						</div>
 						<?php endif; ?>
 						<?php the_content(); ?>
@@ -35,10 +35,22 @@ get_header(); ?>
 				</article><!-- #post -->
 
 				<?php comments_template(); ?>
-			<?php endwhile; ?>
+                                <?php if ( ! current_user_can('edit_post', the_ID()) ) { ?>
+                                    <script>
+                                      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                                      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                                      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                                      ga('create', 'UA-20203215-1', 'auto');
+                                      ga('send', 'pageview');
+
+                                    </script>
+                                <?php }
+			endwhile; ?>
 
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php get_footer();
