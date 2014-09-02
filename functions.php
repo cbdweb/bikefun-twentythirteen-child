@@ -77,7 +77,6 @@ function twentythirteen_paging_nav() {
                 WHERE  `wp_postmeta`.`meta_key` =  'bf_events_startdate'
                 AND `wp_postmeta`.`meta_value` < " . get_post_meta($post->ID, 'bf_events_startdate', true) . "
                 AND wp_posts.post_status = 'publish'
-                AND `wp_postmeta`.`meta_value` > $today
                         ORDER BY wp_postmeta.meta_value DESC
                         LIMIT 1");
         $next = $wpdb->get_row("SELECT `wp_posts`.`ID` as post_id, `wp_posts`.`post_title` as title
