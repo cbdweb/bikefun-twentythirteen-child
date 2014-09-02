@@ -11,23 +11,23 @@
 function twentythirteen_post_nav() {
 	global $post;
         
-        if($post->post_type === "tf_events") {
+        if($post->post_type === "bf_events") {
             global $wpdb;
             $now = time() + ( get_option( 'gmt_offset' ) * 3600 );
             $today = intval( $now / 86400 ) * 86400;
             $previous = $wpdb->get_row("SELECT `wp_posts`.`ID`, `wp_posts`.`post_title` as title
                     FROM $wpdb->postmeta wp_postmeta
                     LEFT JOIN  $wpdb->posts wp_posts ON  `wp_postmeta`.`post_id` =  `wp_posts`.`ID` 
-                    WHERE  `wp_postmeta`.`meta_key` =  'tf_events_startdate'
-                    AND `wp_postmeta`.`meta_value` < " . get_post_meta($post->ID, 'tf_events_startdate', true) . "
+                    WHERE  `wp_postmeta`.`meta_key` =  'bf_events_startdate'
+                    AND `wp_postmeta`.`meta_value` < " . get_post_meta($post->ID, 'bf_events_startdate', true) . "
                     AND wp_posts.post_status = 'publish'
                             ORDER BY wp_postmeta.meta_value DESC
                             LIMIT 1");
             $next = $wpdb->get_row("SELECT `wp_posts`.`ID`, `wp_posts`.`post_title` as title
                     FROM $wpdb->postmeta wp_postmeta
                     LEFT JOIN  $wpdb->posts wp_posts ON  `wp_postmeta`.`post_id` =  `wp_posts`.`ID` 
-                    WHERE  `wp_postmeta`.`meta_key` =  'tf_events_startdate'
-                    AND `wp_postmeta`.`meta_value` > " . get_post_meta($post->ID, 'tf_events_startdate', true) . "
+                    WHERE  `wp_postmeta`.`meta_key` =  'bf_events_startdate'
+                    AND `wp_postmeta`.`meta_value` > " . get_post_meta($post->ID, 'bf_events_startdate', true) . "
                     AND wp_posts.post_status = 'publish'
                             ORDER BY wp_postmeta.meta_value ASC
                             LIMIT 1");
@@ -46,12 +46,12 @@ function twentythirteen_post_nav() {
 		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'twentythirteen' ); ?></h1>
 		<div class="nav-links">
                 <?php
-                if($post->post_type === "tf_events" ) {
+                if($post->post_type === "bf_events" ) {
                     if($previous) { ?>
-                    <a href="<?=home_url('?post_type=tf_events&p=' . $previous->ID)?>"  rel="prev"><span class="meta-nav">←</span> <?=$previous->title;?></a>
+                    <a href="<?=home_url('?post_type=bf_events&p=' . $previous->ID)?>"  rel="prev"><span class="meta-nav">←</span> <?=$previous->title;?></a>
                     <?php }
                     if($next) { ?>
-                            <a href="<?=home_url('?post_type=tf_events&p=' . $next->ID);?>" rel="next"> <?=$next->title;?> <span class="meta-nav">→</span></a>
+                            <a href="<?=home_url('?post_type=bf_events&p=' . $next->ID);?>" rel="next"> <?=$next->title;?> <span class="meta-nav">→</span></a>
                     <?php }
                 } else {	
 			previous_post_link( '%link', _x( '<span class="meta-nav">&larr;</span> %title', 'Previous post link', 'twentythirteen' ) ); 
@@ -64,14 +64,42 @@ function twentythirteen_post_nav() {
 }
 
 function twentythirteen_paging_nav() {
+        
+    global $post;
+
+    if($post->post_type === "bf_events") {
+        global $wpdb;
+        $now = time() + ( get_option( 'gmt_offset' ) * 3600 );
+        $today = intval( $now / 86400 ) * 86400;
+        $previous = $wpdb->get_row("SELECT `wp_posts`.`ID` as post_id, `wp_posts`.`post_title` as title
+                FROM $wpdb->postmeta wp_postmeta
+                LEFT JOIN  $wpdb->posts wp_posts ON  `wp_postmeta`.`post_id` =  `wp_posts`.`ID` 
+                WHERE  `wp_postmeta`.`meta_key` =  'bf_events_startdate'
+                AND `wp_postmeta`.`meta_value` < " . get_post_meta($post->ID, 'bf_events_startdate', true) . "
+                AND wp_posts.post_status = 'publish'
+                AND `wp_postmeta`.`meta_value` > $today
+                        ORDER BY wp_postmeta.meta_value DESC
+                        LIMIT 1");
+        $next = $wpdb->get_row("SELECT `wp_posts`.`ID` as post_id, `wp_posts`.`post_title` as title
+                FROM $wpdb->postmeta wp_postmeta
+                LEFT JOIN  $wpdb->posts wp_posts ON  `wp_postmeta`.`post_id` =  `wp_posts`.`ID` 
+                WHERE  `wp_postmeta`.`meta_key` =  'bf_events_startdate'
+                AND `wp_postmeta`.`meta_value` > " . get_post_meta($post->ID, 'bf_events_startdate', true) . "
+                AND wp_posts.post_status = 'publish'
+                        ORDER BY wp_postmeta.meta_value ASC
+                        LIMIT 1");
+        
+        if ( ! $next && ! $previous ) {
+		return;
+	}
+    } else {
 	global $wp_query;
 
 	// Don't print empty markup if there's only one page.
 	if ( $wp_query->max_num_pages < 2 )
 		return;
+    }
 	
-        global $post;
-        
         ?>
 
 
@@ -80,9 +108,9 @@ function twentythirteen_paging_nav() {
 		<div class="nav-links">
 
                 <?php
-                if($post->post_type === "tf_events" ) {
-                    if($previous) echo '<a href="' . home_url('?post_type=tf_events&p=' . $previous->ID) . '"><span class="meta-nav">Previous Event</span>' . $previous->title;
-                    if($next) echo '<a href="' . home_url('?post_type=tf_events&p=' . $next->ID) . '"><span class="meta-nav">Next Event</span>' . $next->title;
+                if($post->post_type === "bf_events" ) {
+                    if($previous) echo '<div class="nav-previous"><a href="' . post_permalink( $previous->post_id ) . '"><span class="meta-nav">Previous Event</span>' . $previous->title . "</div>";
+                    if($next) echo '<div class="nav-next"><a href="' . post_permalink( $next->post_id ) . '"><span class="meta-nav">Next Event</span>' . $next->title . "</div>";
                 } else {	
                     if ( get_next_posts_link() ) : ?>
 			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentythirteen' ) ); ?></div>
