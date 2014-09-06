@@ -108,8 +108,8 @@ function twentythirteen_paging_nav() {
 
                 <?php
                 if($post->post_type === "bf_events" ) {
-                    if($previous) echo '<div class="nav-previous"><a href="' . post_permalink( $previous->post_id ) . '"><span class="meta-nav">Previous Event</span>' . $previous->title . "</div>";
-                    if($next) echo '<div class="nav-next"><a href="' . post_permalink( $next->post_id ) . '"><span class="meta-nav">Next Event</span>' . $next->title . "</div>";
+                    if($previous) echo '<div class="nav-previous"><a href="' . post_permalink( $previous->post_id ) . '"><span class="meta-nav">Previous Event:</span>' . $previous->title . "</div>";
+                    if($next) echo '<div class="nav-next"><a href="' . post_permalink( $next->post_id ) . '"><span class="meta-nav">Next Event:</span>' . $next->title . "</div>";
                 } else {	
                     if ( get_next_posts_link() ) : ?>
 			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentythirteen' ) ); ?></div>
