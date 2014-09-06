@@ -32,3 +32,6 @@ h1.site-title, h2.site-description {
     float: right;
 }
 
+.site-footer .sidebar-container {
+    background-color: white;
+}
