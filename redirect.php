@@ -5,14 +5,15 @@
  * 
  */
 
-if( isset ( $_GET['UNID'] ) ) {
+if( isset ( $_GET['UNID'] ) && $_GET['UNID'] !== "" ) {
     $UNID = $_GET['UNID'];
     global $wpdb;
     $query = $wpdb->prepare ( "SELECT post_id FROM " . $wpdb->postmeta . " WHERE meta_key='bf_events_UNID' AND meta_value='%s'", $UNID );
     $post_meta = $wpdb->get_row ( $query, 'OBJECT' );
-    if ( $post_meta ) 
+    if ( $post_meta ) {
         header("Location: " . get_permalink( $post_meta->post_id ) ,TRUE ,301 );
         exit;
+    }
 }
 
 get_header(); ?>
