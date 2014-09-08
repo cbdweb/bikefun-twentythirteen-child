@@ -57,6 +57,7 @@
                                 update_post_meta($post_id, "bf_events_image", $data[7] );
                                 update_post_meta($post_id, "bf_events_startdate", $bf_events_startdate );
                                 if($bf_events_enddate) update_post_meta($post_id, "bf_events_enddate", $bf_events_enddate );
+                                update_post_meta($post_id, "bf_events_UNID", $data[10] );
                             }
                         }
                         fclose($handle);
