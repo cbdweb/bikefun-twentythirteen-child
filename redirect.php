@@ -1,6 +1,8 @@
 <?php
 /*
 * Template Name: 301 redirect
+ * This didn't work because the payload (UNID) from the old site is in the URL # component
+ * so the server never sees it. (Duh).
 *
  * 
  */
