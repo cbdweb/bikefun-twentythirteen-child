@@ -35,3 +35,16 @@ h1.site-title, h2.site-description {
 .site-footer .sidebar-container {
     background-color: white;
 }
+
+.site-header {
+    background: none !important;
+}
+
+.hentry {
+    padding: 0;
+}
+
+header#masthead table {
+    border-spacing: 0 !important;
+    border-bottom: 0 !important;
+}
