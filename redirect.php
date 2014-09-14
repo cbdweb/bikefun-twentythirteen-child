@@ -29,7 +29,7 @@ get_header(); ?>
                             </header><!-- .entry-header -->
 
                             <div class="entry-content">
-                                We tried to redirect you to the correct address on the new bikefun website, but we failed miserably.<br/>
+                                We tried to redirect you to the correct address on the new <?=get_option('bf-organisation')?> website, but we failed miserably.<br/>
                                 Think of this as an opportunity to discover the new site by finding the event on our 
                                 <a href="<?=get_site_url()?>">home page</a>!
                             </div><!-- .entry-content -->
