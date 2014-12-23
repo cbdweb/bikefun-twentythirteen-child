@@ -39,7 +39,11 @@
 			
 			</a> */ ?>
                     
-                    	<?php if (function_exists (Ihrss)) Ihrss(); ?>
+                    	<?php
+                        $detect = new Mobile_Detect; 
+                        if( ! $detect->isMobile() )
+                            if (function_exists (Ihrss)) Ihrss(); 
+                        ?>
                     
 		</header><!-- #masthead -->
 
