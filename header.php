@@ -40,8 +40,8 @@
 			</a> */ ?>
                     
                     	<?php
-                        $detect = new Mobile_Detect; 
-                        if( ! $detect->isMobile() )
+/*                        $detect = new Mobile_Detect; 
+                        if( ! $detect->isMobile() ) */
                             if (function_exists (Ihrss)) Ihrss(); 
                         ?>
                     
