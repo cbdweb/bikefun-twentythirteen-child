@@ -18,6 +18,7 @@
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html <?php language_attributes(); ?>>
 <!--<![endif]-->
+<?php include ( get_stylesheet_directory() . "/Mobile_Detect.php" );?>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
@@ -41,7 +42,7 @@
                     
                     	<?php
                         $detect = new Mobile_Detect; 
-/*                        if( ! $detect->isMobile() ) */
+                        if( ! $detect->isMobile() )
                             if (function_exists (Ihrss)) Ihrss(); 
                         ?>
                     
