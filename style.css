@@ -48,3 +48,7 @@ header#masthead table {
     border-spacing: 0 !important;
     border-bottom: 0 !important;
 }
+.site {
+    border: none;
+    max-width: inherit;
+}

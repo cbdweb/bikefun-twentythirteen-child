@@ -34,18 +34,11 @@
 <body <?php body_class(); ?>>
 	<div id="page" class="hfeed site">
 		<header id="masthead" class="site-header" role="banner">
-                    <?php /*
-			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-				<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
-			
-			</a> */ ?>
-                    
-                    	<?php
-                        $detect = new Mobile_Detect; 
-                        if( ! $detect->isMobile() )
-                            if (function_exists (Ihrss)) Ihrss(); 
-                        ?>
-                    
+            <?php
+                $detect = new Mobile_Detect;
+                if( ! $detect->isMobile() )
+                    echo do_shortcode( '[ihrss-gallery type="WIDGET" height="230" speed="2" bgcolor="#FFFFFF" gap="0" random="YES"]' );
+            ?>
 		</header><!-- #masthead -->
 
 		<div id="main" class="site-main">
